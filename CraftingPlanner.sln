@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftingPlanner", "CraftingPlanner\CraftingPlanner.csproj", "{F4B25256-D3FD-47BC-B523-7FD064709DE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftingPlannerLib", "CraftingPlannerLib\CraftingPlannerLib.csproj", "{E562DA79-B3FA-4F53-BF3C-EAE9B1F06946}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC612C4D-E099-4C46-AD55-0B9E1A773CA8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4B25256-D3FD-47BC-B523-7FD064709DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4B25256-D3FD-47BC-B523-7FD064709DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4B25256-D3FD-47BC-B523-7FD064709DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4B25256-D3FD-47BC-B523-7FD064709DE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E562DA79-B3FA-4F53-BF3C-EAE9B1F06946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E562DA79-B3FA-4F53-BF3C-EAE9B1F06946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E562DA79-B3FA-4F53-BF3C-EAE9B1F06946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E562DA79-B3FA-4F53-BF3C-EAE9B1F06946}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BD0038A-26EE-49A6-BDA6-9E8493828E77}
+	EndGlobalSection
+EndGlobal

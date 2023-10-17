@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="CraftingPlanner.Views.ItemListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CraftingPlanner.Views"
+             xmlns:vm="clr-namespace:CraftingPlanner.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance vm:ItemListViewModel, IsDesignTimeCreatable=False}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Height="25" Margin="5,0,0,0">
+            <Label DockPanel.Dock="Left" Content="Item list"/>
+            <Separator/>
+        </DockPanel>
+        <DataGrid 
+                    x:Name="CompareResultGrid" Grid.Row="1" IsReadOnly="true" SelectionMode="Single" SelectionUnit="FullRow" Margin="5,5,5,5" CanUserSortColumns="True"
+                    AutoGenerateColumns="False" Grid.RowSpan="1"
+                    ItemsSource="{Binding Path=Items, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding Path=SelectedItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ItemName}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding Type}" Header="Type"/>
+                <DataGridTextColumn Binding="{Binding ModName}" Header="Mod"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="5" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="5">
+                    <Label Content="GTR Description:"/>
+                    <TextBox x:Name="tbGtrSearch" Height="25" VerticalContentAlignment="Center" 
+                                     Text="{Binding Path=GridDetailViewModel.GtrFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=250}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="5">
+                    <Label Content="Result:"/>
+                    <ComboBox x:Name="cbResultType" Height="25"
+                                      SelectedItem="{Binding Path=GridDetailViewModel.ResultTypeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      ItemsSource="{Binding Path=GridDetailViewModel.ResultTypeCollection, Mode=OneTime}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="5">
+                    <Label Content="DEP Description"/>
+                    <TextBox x:Name="tbDepSearch" Height="25" VerticalContentAlignment="Center" 
+                                     Text="{Binding Path=GridDetailViewModel.DepFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=250}"/>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30">
+                <Button Name="bFilter" Margin="5" Content="Filter" Command="{Binding Path=FilterCommand}" MinWidth="50"/>
+                <Button Name="bReset" Margin="5" Content="Reset" Command="{Binding Path=ClearFilterCommand}" MinWidth="50"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
