@@ -2,7 +2,7 @@
 
 namespace CraftingPlannerLib.Tables
 {
-    public class BaseTable<T> where T : Entity
+    public class BaseTable<T> where T : NamedEntity
     {
         public int NextUID { get; }
 

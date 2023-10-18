@@ -1,4 +1,5 @@
-﻿using CraftingPlannerLib.Tables;
+﻿using CraftingPlannerLib.DataImport.Models;
+using CraftingPlannerLib.Tables;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -14,40 +15,55 @@ namespace CraftingPlannerLib.DataImport
             if (data == null)
                 return new CraftingPlannerData();
 
-            var mapper = new Mapping();
-            var modsTable = new ModsTable(data.Mods.ToDictionary(k => k.ID, mapper.Map));
-            var itemTypeTable = new ItemTypesTable(data.ItemTypes.ToDictionary(k => k.ID, mapper.Map));
+            var modsTable = new ModsTable(data.Mods.ToDictionary(
+                k => k.ID,
+                v => CreateMod(v)));
 
-            var itemsTable = new ItemsTable(data.Items.ToDictionary(k => k.ID, v =>
-            {
-                return new Entities.Item(
-                    itemName: v.Name,
-                    type: GetItemType(v.TypeID, itemTypeTable.Data),
-                    mod: GetMod(v.ModID, modsTable.Data),
-                    recipe: null);
-            }));
+            var itemTypeTable = new ItemTypesTable(data.ItemTypes.ToDictionary(
+                k => k.ID,
+                v => CreateItemType(v)));
+
+            var itemsTable = new ItemsTable(data.Items.ToDictionary(
+                k => k.ID,
+                v => CreateItem(v)));
 
             // Add recipes to items.
             foreach (var itemEntity in data.Items)
-                itemsTable.Data[itemEntity.ID].Recipe = GetRecipe(itemEntity.Recipes, itemsTable.Data);
+                LinkRecipeToItem(itemEntity, (id) => { return itemsTable.Data[id]; });
 
             return new CraftingPlannerData(itemsTable, modsTable, itemTypeTable);
+
+            Entities.Item CreateItem(External.Item other)
+            {
+                return new Entities.Item(
+                    other.Name,
+                    other.TypeID == -1 ? null : itemTypeTable!.Data[other.TypeID],
+                    other.ModID == -1 ? null : modsTable!.Data[other.ModID],
+                    null);
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Entities.ItemType? GetItemType(int id, IDictionary<int, Entities.ItemType> map)
-            => id == -1 ? null : map[id];
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Entities.Mod? GetMod(int id, IDictionary<int, Entities.Mod> map)
-            => id == -1 ? null : map[id];
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Dictionary<Entities.Item, double>? GetRecipe(IDictionary<int, double>? recipe, IDictionary<int, Entities.Item> map)
+        private static void LinkRecipeToItem(External.Item item, Func<int, Entities.Item> itemLookup)
         {
-            if (recipe == null) return null;
-            return recipe.ToDictionary(k => map[k.Key], k => k.Value);
+            // Imported item has no recipe. Can skip.
+            if (item.Recipes == null || item.Recipes.Count == 0)
+                return;
+
+            // Convert imported recipe to new recipe.
+            var targetItem = itemLookup(item.ID);
+            var inputItems = item.Recipes.ToDictionary(k => itemLookup(k.Key), v => v.Value);
+            var recipe = new Entities.Recipe(targetItem, 1, inputItems);
+
+            // Link recipe to item.
+            targetItem.Recipe = recipe;
         }
+
+        private static Entities.Mod CreateMod(External.Mod other)
+            => new(other.Name) { Id = other.ID };
+
+        private static Entities.ItemType CreateItemType(External.ItemType other)
+            => new(other.Name) { Id = other.ID };
 
         private static async Task<T?> ReadAsync<T>(string filePath)
         {

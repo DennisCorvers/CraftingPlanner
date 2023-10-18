@@ -1,12 +1,8 @@
 ﻿namespace CraftingPlannerLib.Entities
 {
-    public class Mod : Entity
+    public class Mod : NamedEntity
     {
-        public string Name { get; set; }
-
         public Mod(string name)
-        {
-            Name = name;
-        }
+            : base(name) { }
     }
 }

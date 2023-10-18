@@ -20,11 +20,11 @@ namespace CraftingPlannerLib.Tables
                 if (x is null || y is null)
                     return false;
 
-                return StringComparer.OrdinalIgnoreCase.Equals(x.ItemName, y.ItemName);
+                return StringComparer.OrdinalIgnoreCase.Equals(x.Name, y.Name);
             }
 
             public int GetHashCode([DisallowNull] Item obj)
-                => obj.ItemName.GetHashCode();
+                => obj.Name.GetHashCode();
         }
     }
 }

@@ -1,22 +1,37 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using CraftingPlannerLib.Utils;
 using ProtoBuf;
 
 namespace CraftingPlannerLib.Entities
 {
     [Serializable]
-    [DebuggerDisplay("Name = {ItemName}")]
+    [DebuggerDisplay("Name = {Name}")]
     [ProtoContract]
-    public class Item : Entity
+    public class Item : NamedEntity
     {
-        public string ItemName { get; set; }
+        private ItemType? m_type;
+        private Mod? m_mod;
+        private Recipe? m_recipe;
 
-        public ItemType? Type { get; set; }
+        public ItemType? Type
+        {
+            get => m_type;
+            set => m_type = value;
+        }
 
-        public Mod? Mod { get; set; }
+        public Mod? Mod
+        {
+            get => m_mod;
+            set => m_mod = value;
+        }
 
-        public IReadOnlyDictionary<Item, double>? Recipe { get; set; }
+        public Recipe? Recipe
+        {
+            get => m_recipe;
+            set => m_recipe = value;
+        }
 
         public Item(string itemName)
             : this(itemName, null, null, null)
@@ -24,9 +39,9 @@ namespace CraftingPlannerLib.Entities
 
         }
 
-        public Item(string itemName, ItemType? type, Mod? mod, IReadOnlyDictionary<Item, double>? recipe)
+        public Item(string itemName, ItemType? type, Mod? mod, Recipe? recipe)
+            : base(itemName)
         {
-            ItemName = itemName;
             Type = type;
             Mod = mod;
             Recipe = recipe;

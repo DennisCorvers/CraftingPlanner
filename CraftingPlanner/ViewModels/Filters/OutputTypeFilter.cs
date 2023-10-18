@@ -13,7 +13,7 @@ namespace CraftingPlanner.ViewModels.Filters
         public IEnumerable<Item> Filter(IEnumerable<Item> items)
         {
             if (Type == OutputType.Ingredient)
-                return items.Where(x => x.Recipe != null && x.Recipe.ContainsKey(x));
+                return items.Where(x => x.Recipe != null && x.Recipe.HasItemAsIngredient(x));
 
             return items;
         }

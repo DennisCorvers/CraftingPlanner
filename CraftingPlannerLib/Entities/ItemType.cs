@@ -2,13 +2,9 @@
 
 namespace CraftingPlannerLib.Entities
 {
-    public class ItemType : Entity
+    public class ItemType : NamedEntity
     {
-        public string Name { get; set; }
-
         public ItemType(string name)
-        {
-            Name = name;
-        }
+            : base(name) { }
     }
 }

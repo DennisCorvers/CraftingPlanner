@@ -1,12 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace CraftingPlannerLib.DataImport
+namespace CraftingPlannerLib.DataImport.External
 {
     [Serializable]
-    internal class ModEntity
+    internal class Mod
     {
         [JsonConstructor]
-        public ModEntity(int iD, string name)
+        public Mod(int iD, string name)
         {
             ID = iD;
             Name = name;

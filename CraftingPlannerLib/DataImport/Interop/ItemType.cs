@@ -1,12 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace CraftingPlannerLib.DataImport
+namespace CraftingPlannerLib.DataImport.External
 {
     [Serializable]
-    internal class ItemTypeEntity
+    internal class ItemType
     {
         [JsonConstructor]
-        public ItemTypeEntity(int iD, string name)
+        public ItemType(int iD, string name)
         {
             ID = iD;
             Name = name;
