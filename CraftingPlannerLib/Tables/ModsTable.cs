@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CraftingPlannerLib.Tables
 {
-    public class ModsTable : BaseTable<Mod>
+    public class ModsTable : Repository<Mod>
     {
         public ModsTable(Dictionary<int, Mod> data)
             : base(data, new ModEqualityComparer())

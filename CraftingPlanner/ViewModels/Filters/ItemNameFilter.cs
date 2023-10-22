@@ -13,7 +13,7 @@ namespace CraftingPlanner.ViewModels.Filters
         {
             return ItemName == null ?
                 items :
-                items.Where(x => x.Name.Contains(ItemName));
+                items.Where(x => x.Name.Contains(ItemName, System.StringComparison.OrdinalIgnoreCase));
         }
     }
 }

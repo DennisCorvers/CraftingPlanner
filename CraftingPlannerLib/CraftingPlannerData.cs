@@ -4,24 +4,31 @@ namespace CraftingPlannerLib
 {
     public class CraftingPlannerData
     {
-        private ItemsTable m_items;
+        private ItemRepository m_items;
 
         private ModsTable m_mods;
 
         private ItemTypesTable m_itemTypes;
 
+        public ModsTable Mods
+            => m_mods;
+        public ItemTypesTable ItemTypes
+            => m_itemTypes;
+        public ItemRepository Items
+            => m_items;
+
         public CraftingPlannerData()
         {
-            m_items = new ItemsTable(new());
+            m_items = new ItemRepository(new());
             m_mods = new ModsTable(new());
             m_itemTypes = new ItemTypesTable(new());
         }
 
-        internal CraftingPlannerData(ItemsTable itemsTable, ModsTable modsTable, ItemTypesTable itemTypeTable)
+        internal CraftingPlannerData(ItemRepository itemsTable, ModsTable modsTable, ItemTypesTable itemTypeTable)
         {
             m_items = itemsTable;
             m_mods = modsTable;
             m_itemTypes = itemTypeTable;
-        }
+        } 
     }
 }

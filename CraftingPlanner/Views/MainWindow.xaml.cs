@@ -1,4 +1,5 @@
-﻿using CraftingPlannerLib.DataImport;
+﻿using CraftingPlanner.ViewModels;
+using CraftingPlannerLib.DataImport;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,10 @@ namespace CraftingPlanner
             var path = "D:\\Documents\\GTNH Recipes.json";
             var importer = new DataImporter();
             var result = await importer.Import(path);
+
+            var vm = new ItemListViewModel();
+            this.ItemListControl.DataContext = vm;
+            vm.SetData(result);
         }
     }
 }

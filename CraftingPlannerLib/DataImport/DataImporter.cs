@@ -23,13 +23,13 @@ namespace CraftingPlannerLib.DataImport
                 k => k.ID,
                 v => CreateItemType(v)));
 
-            var itemsTable = new ItemsTable(data.Items.ToDictionary(
+            var itemsTable = new ItemRepository(data.Items.ToDictionary(
                 k => k.ID,
                 v => CreateItem(v)));
 
             // Add recipes to items.
             foreach (var itemEntity in data.Items)
-                LinkRecipeToItem(itemEntity, (id) => { return itemsTable.Data[id]; });
+                LinkRecipeToItem(itemEntity, itemsTable.Get!);
 
             return new CraftingPlannerData(itemsTable, modsTable, itemTypeTable);
 
@@ -37,8 +37,8 @@ namespace CraftingPlannerLib.DataImport
             {
                 return new Entities.Item(
                     other.Name,
-                    other.TypeID == -1 ? null : itemTypeTable!.Data[other.TypeID],
-                    other.ModID == -1 ? null : modsTable!.Data[other.ModID],
+                    other.TypeID == -1 ? null : itemTypeTable!.Get(other.TypeID)!,
+                    other.ModID == -1 ? null : modsTable!.Get(other.ModID),
                     null);
             }
         }

@@ -6,13 +6,20 @@ namespace CraftingPlannerLib.Entities
     [DebuggerDisplay("Name = {Name}")]
     public abstract class NamedEntity
     {
+        private const int DefaultID = -1;
         private int m_id;
         private string m_name;
 
         public int Id
         {
             get => m_id;
-            set => m_id = value;
+            internal set
+            {
+                if (value == DefaultID)
+                    throw new ArgumentException(nameof(value));
+
+                m_id = value;
+            }
         }
 
         public string Name
@@ -22,10 +29,11 @@ namespace CraftingPlannerLib.Entities
         }
 
         public NamedEntity(string name)
-            : this(-1, name)
+            : this(DefaultID, name)
         { }
 
-        public NamedEntity(int id, string name)
+        // Serialization constructor
+        private NamedEntity(int id, string name)
         {
             m_id = id;
             m_name = name.ToFirstLetterUpperCase();

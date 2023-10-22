@@ -3,9 +3,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CraftingPlannerLib.Tables
 {
-    internal class ItemsTable : BaseTable<Item>
+    public class ItemRepository : Repository<Item>
     {
-        public ItemsTable(Dictionary<int, Item> data)
+        public ItemRepository(Dictionary<int, Item> data)
             : base(data, new ItemEqualityComparer())
         {
         }
@@ -25,6 +25,15 @@ namespace CraftingPlannerLib.Tables
 
             public int GetHashCode([DisallowNull] Item obj)
                 => obj.Name.GetHashCode();
+        }
+
+        public IEnumerable<Item> Filter(IEnumerable<IItemFilter> filters)
+        {
+            var filteredItems = base.GetAll();
+            foreach (var filter in filters)
+                filteredItems = filter.Filter(filteredItems);
+
+            return filteredItems;
         }
     }
 }

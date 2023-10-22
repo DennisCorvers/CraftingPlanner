@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CraftingPlannerLib.Tables
 {
-    public class ItemTypesTable : BaseTable<ItemType>
+    public class ItemTypesTable : Repository<ItemType>
     {
         public ItemTypesTable(Dictionary<int, ItemType> data)
             : base(data, new ItemTypeEqualityComparer())
