@@ -1,7 +1,7 @@
-﻿using CraftingPlannerLib.Entities;
+﻿using CraftingPlannerLib.DAL.Entities;
 using System.Runtime.CompilerServices;
 
-namespace CraftingPlannerLib.Tables
+namespace CraftingPlannerLib.DAL.Repositories
 {
     public class Repository<T> where T : NamedEntity
     {

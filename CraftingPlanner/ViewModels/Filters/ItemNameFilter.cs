@@ -1,5 +1,5 @@
 ﻿using CraftingPlannerLib;
-using CraftingPlannerLib.Entities;
+using CraftingPlannerLib.DAL.Entities;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -2,7 +2,7 @@
 using CraftingPlanner.UI;
 using CraftingPlanner.ViewModels.Filters;
 using CraftingPlannerLib;
-using CraftingPlannerLib.Entities;
+using CraftingPlannerLib.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +15,6 @@ namespace CraftingPlanner.ViewModels
     internal partial class ItemListViewModel : ViewModelBase
     {
         private readonly ItemNameFilter m_itemNameFilter;
-        private readonly ItemTypeFilter m_itemTypeFilter;
         private readonly ModFilter m_modFilter;
 
         private readonly IEnumerable<IItemFilter> m_itemFilters;
@@ -32,9 +31,6 @@ namespace CraftingPlanner.ViewModels
 
         public IEnumerable<Mod> Mods
             => Data.Mods.GetAll();
-
-        public IEnumerable<ItemType> ItemTypes
-            => Data.ItemTypes.GetAll();
 
         public IEnumerable<Item> FilteredItems
         {
@@ -87,19 +83,6 @@ namespace CraftingPlanner.ViewModels
             }
         }
 
-        public ItemType? ItemTypeFilter
-        {
-            get
-            {
-                return m_itemTypeFilter.ItemType;
-            }
-            set
-            {
-                if (base.SetProperty(ref m_itemTypeFilter.ItemType, value))
-                    OnFilterChanged();
-            }
-        }
-
         public Mod? ModFilter
         {
             get
@@ -116,12 +99,10 @@ namespace CraftingPlanner.ViewModels
         public ItemListViewModel()
         {
             m_itemNameFilter = new();
-            m_itemTypeFilter = new();
             m_modFilter = new();
 
             m_itemFilters = new List<IItemFilter>()
             {
-                m_itemTypeFilter,
                 m_modFilter,
                 m_itemNameFilter,
             };
@@ -140,7 +121,6 @@ namespace CraftingPlanner.ViewModels
         {
             Data = data;
             base.OnPropertyChanged(nameof(Mods));
-            base.OnPropertyChanged(nameof(ItemTypes));
             m_filteredItems = Data.Items.GetAll();
         }
 
@@ -150,7 +130,6 @@ namespace CraftingPlanner.ViewModels
         private void OnFilterClear(object? obj)
         {
             base.SetProperty(ref m_itemNameFilter.ItemName, null, nameof(ItemNameFilter));
-            base.SetProperty(ref m_itemTypeFilter.ItemType, null, nameof(ItemTypeFilter));
             base.SetProperty(ref m_modFilter.Mod, null, nameof(ModFilter));
             FilteredItems = Data.Items.GetAll();
         }

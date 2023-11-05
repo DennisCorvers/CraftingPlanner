@@ -1,7 +1,7 @@
-﻿using CraftingPlannerLib.Entities;
+﻿using CraftingPlannerLib.DAL.Entities;
 using System.Diagnostics.CodeAnalysis;
 
-namespace CraftingPlannerLib.Tables
+namespace CraftingPlannerLib.DAL.Repositories
 {
     public class ModsTable : Repository<Mod>
     {

@@ -3,14 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftingPlanner", "CraftingPlanner\CraftingPlanner.csproj", "{F4B25256-D3FD-47BC-B523-7FD064709DE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CraftingPlanner", "CraftingPlanner\CraftingPlanner.csproj", "{F4B25256-D3FD-47BC-B523-7FD064709DE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftingPlannerLib", "CraftingPlannerLib\CraftingPlannerLib.csproj", "{E562DA79-B3FA-4F53-BF3C-EAE9B1F06946}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CraftingPlannerLib", "CraftingPlannerLib\CraftingPlannerLib.csproj", "{E562DA79-B3FA-4F53-BF3C-EAE9B1F06946}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC612C4D-E099-4C46-AD55-0B9E1A773CA8}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataImport", "DataImport\DataImport.csproj", "{EE984B9F-EC99-4225-A1A5-397135426266}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{E562DA79-B3FA-4F53-BF3C-EAE9B1F06946}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E562DA79-B3FA-4F53-BF3C-EAE9B1F06946}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E562DA79-B3FA-4F53-BF3C-EAE9B1F06946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE984B9F-EC99-4225-A1A5-397135426266}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE984B9F-EC99-4225-A1A5-397135426266}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE984B9F-EC99-4225-A1A5-397135426266}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE984B9F-EC99-4225-A1A5-397135426266}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

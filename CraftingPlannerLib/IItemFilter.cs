@@ -1,4 +1,4 @@
-﻿using CraftingPlannerLib.Entities;
+﻿using CraftingPlannerLib.DAL.Entities;
 
 namespace CraftingPlannerLib
 {

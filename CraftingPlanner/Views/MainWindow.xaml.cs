@@ -1,19 +1,7 @@
 ﻿using CraftingPlanner.ViewModels;
-using CraftingPlannerLib.DataImport;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DataImport;
+using DataImport.RecipeExporter;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CraftingPlanner
 {
@@ -31,14 +19,20 @@ namespace CraftingPlanner
 
         private async void Test()
         {
-            // Test
-            var path = "D:\\Documents\\GTNH Recipes.json";
-            var importer = new DataImporter();
-            var result = await importer.Import(path);
+            var path = "D:\\Documents\\temp\\Stoneblock.json";
+            var importer = new RecipeExporterImporter();
 
-            var vm = new ItemListViewModel();
-            this.ItemListControl.DataContext = vm;
-            vm.SetData(result);
+            await importer.Import(path);
+        }
+
+        private async void Test2()
+        {
+            var path = "D:\\Documents\\temp\\2023-11-02--23-17.json";
+            var path2 = "D:\\Documents\\temp\\2023-11-02--23-17.json";
+            //var path2 = "D:\\Projects\\Minecraft\\RecipeExporter\\run\\Recipe Exports\\2023-11-03--01-53.json";
+
+            var importer = new RecipeExporterImporter();
+            //await importer.Impoty2(path, path2);
         }
     }
 }

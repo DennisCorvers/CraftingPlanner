@@ -1,7 +1,7 @@
-﻿using CraftingPlannerLib.Entities;
+﻿using CraftingPlannerLib.DAL.Entities;
 using System.Diagnostics.CodeAnalysis;
 
-namespace CraftingPlannerLib.Tables
+namespace CraftingPlannerLib.DAL.Repositories
 {
     public class ItemRepository : Repository<Item>
     {
@@ -29,7 +29,7 @@ namespace CraftingPlannerLib.Tables
 
         public IEnumerable<Item> Filter(IEnumerable<IItemFilter> filters)
         {
-            var filteredItems = base.GetAll();
+            var filteredItems = GetAll();
             foreach (var filter in filters)
                 filteredItems = filter.Filter(filteredItems);
 

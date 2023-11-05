@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using CraftingPlannerLib.Entities;
+using CraftingPlannerLib.DAL.Entities;
 
 namespace CraftingPlannerLib.Calculation
 {

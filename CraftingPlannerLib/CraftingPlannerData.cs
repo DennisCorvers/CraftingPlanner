@@ -1,4 +1,4 @@
-﻿using CraftingPlannerLib.Tables;
+﻿using CraftingPlannerLib.DAL.Repositories;
 
 namespace CraftingPlannerLib
 {
@@ -8,12 +8,8 @@ namespace CraftingPlannerLib
 
         private ModsTable m_mods;
 
-        private ItemTypesTable m_itemTypes;
-
         public ModsTable Mods
             => m_mods;
-        public ItemTypesTable ItemTypes
-            => m_itemTypes;
         public ItemRepository Items
             => m_items;
 
@@ -21,14 +17,12 @@ namespace CraftingPlannerLib
         {
             m_items = new ItemRepository(new());
             m_mods = new ModsTable(new());
-            m_itemTypes = new ItemTypesTable(new());
         }
 
-        internal CraftingPlannerData(ItemRepository itemsTable, ModsTable modsTable, ItemTypesTable itemTypeTable)
+        internal CraftingPlannerData(ItemRepository itemsTable, ModsTable modsTable)
         {
             m_items = itemsTable;
             m_mods = modsTable;
-            m_itemTypes = itemTypeTable;
         } 
     }
 }

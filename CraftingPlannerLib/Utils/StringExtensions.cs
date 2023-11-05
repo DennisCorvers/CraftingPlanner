@@ -12,40 +12,6 @@ namespace CraftingPlannerLib.Utils
     {
         private static readonly CultureInfo EnCultureInfo = new CultureInfo("en-US");
 
-        public static bool TryParseFraction(this string fraction, out double result)
-        {
-            if (double.TryParse(fraction, NumberStyles.AllowDecimalPoint, CultureInfo.GetCultureInfo("en-US"), out result))
-                return true;
-
-            string[] split = fraction.Split(new char[] { ' ', '/' });
-
-            if (split.Length == 2 || split.Length == 3)
-            {
-
-                if (int.TryParse(split[0], out int a) && int.TryParse(split[1], out int b))
-                {
-                    if (split.Length == 2)
-                    {
-                        result = (double)a / b;
-                        return true;
-                    }
-
-
-                    if (int.TryParse(split[2], out int c))
-                    {
-                        result = a + (double)b / c;
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        public static bool IsInteger(this string value)
-        {
-            return int.TryParse(value, out _);
-        }
-
         public static string ToFirstLetterUpperCase(this string value)
             => EnCultureInfo.TextInfo.ToTitleCase(value);
 

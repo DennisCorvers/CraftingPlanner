@@ -4,22 +4,16 @@ using System.Runtime.CompilerServices;
 using CraftingPlannerLib.Utils;
 using ProtoBuf;
 
-namespace CraftingPlannerLib.Entities
+namespace CraftingPlannerLib.DAL.Entities
 {
     [Serializable]
     [DebuggerDisplay("Name = {Name}")]
     [ProtoContract]
     public class Item : NamedEntity
     {
-        private ItemType? m_type;
         private Mod? m_mod;
         private Recipe? m_recipe;
 
-        public ItemType? Type
-        {
-            get => m_type;
-            set => m_type = value;
-        }
 
         public Mod? Mod
         {
@@ -34,15 +28,14 @@ namespace CraftingPlannerLib.Entities
         }
 
         public Item(string itemName)
-            : this(itemName, null, null, null)
+            : this(itemName, null, null)
         {
 
         }
 
-        public Item(string itemName, ItemType? type, Mod? mod, Recipe? recipe)
+        public Item(string itemName, Mod? mod, Recipe? recipe)
             : base(itemName)
         {
-            Type = type;
             Mod = mod;
             Recipe = recipe;
         }

@@ -1,4 +1,4 @@
-﻿namespace CraftingPlannerLib.Entities
+﻿namespace CraftingPlannerLib.DAL.Entities
 {
     public record class Recipe
     {

@@ -1,7 +1,7 @@
 ﻿using CraftingPlannerLib.Utils;
 using System.Diagnostics;
 
-namespace CraftingPlannerLib.Entities
+namespace CraftingPlannerLib.DAL.Entities
 {
     [DebuggerDisplay("Name = {Name}")]
     public abstract class NamedEntity
