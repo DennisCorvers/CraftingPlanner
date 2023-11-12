@@ -6,15 +6,15 @@ namespace DataImport
     {
         public IReadOnlyList<Recipe> Recipes { get; }
 
-        public IReadOnlySet<Mod> Mods { get; }
+        public IReadOnlyList<Mod> Mods { get; }
 
-        public IReadOnlySet<Item> Items { get; }
+        public IReadOnlyList<Item> Items { get; }
 
         public RecipeDB(IReadOnlyList<Recipe> recipes, IEnumerable<Mod> mods, IEnumerable<Item> items)
         {
             Recipes = recipes;
-            Mods = new HashSet<Mod>(mods, BaseModelComparer.Default);
-            Items = new HashSet<Item>(items, BaseModelComparer.Default);
+            Mods = new List<Mod>(mods);
+            Items = new List<Item>(items);
         }
     }
 }

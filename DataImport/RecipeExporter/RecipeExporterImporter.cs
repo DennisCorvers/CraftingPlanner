@@ -1,20 +1,10 @@
 ﻿using DataImport.EqualityComparers;
-using DataImport.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Data;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Text;
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace DataImport.RecipeExporter
 {
-    public class RecipeExporterImporter
+    public class RecipeExporterImporter : IDataImporter
     {
         public async Task<RecipeDB> Import(string path)
         {

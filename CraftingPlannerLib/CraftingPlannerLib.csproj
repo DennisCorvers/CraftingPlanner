@@ -19,4 +19,8 @@
     <PackageReference Include="protobuf-net.Core" Version="3.2.26" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataImport\DataImport.csproj" />
+  </ItemGroup>
+
 </Project>

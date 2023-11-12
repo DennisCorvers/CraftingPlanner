@@ -4,12 +4,14 @@ namespace DataImport.Models
 {
     public sealed class Mod : BaseModel
     {
-        public IReadOnlySet<Item> Items { get; }
+        public IReadOnlyList<Item> Items { get; }
 
-        public Mod(int id, string name, HashSet<Item> items)
+        public Mod(int id, string name, IEnumerable<Item> items)
             : base(id, NameFormatting.FormatName(name))
         {
-            Items = items;
+            Items = items
+                .OrderBy(x => x.Name)
+                .ToList();
         }
     }
 }
