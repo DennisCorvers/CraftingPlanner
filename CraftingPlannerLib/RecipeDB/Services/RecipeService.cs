@@ -17,6 +17,9 @@ namespace CraftingPlannerLib.RecipeDB.Services
             m_recipeRepository = recipeRepository;
         }
 
+        public IEnumerable<Recipe> GetAll()
+            => m_recipeRepository.Entities;
+
         public IEnumerable<Recipe> MatchRecipes(string itemName, string modName, ItemStackType itemStackType)
         {
             var mod = m_modRepository.Find(modName);

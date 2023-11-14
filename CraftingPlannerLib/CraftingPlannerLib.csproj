@@ -23,4 +23,8 @@
     <ProjectReference Include="..\DataImport\DataImport.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Calculation\" />
+  </ItemGroup>
+
 </Project>

@@ -16,4 +16,8 @@
     <ProjectReference Include="..\DataImport\DataImport.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

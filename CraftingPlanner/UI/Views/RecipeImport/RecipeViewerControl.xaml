@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CraftingPlanner.Views"
-             xmlns:vm="clr-namespace:CraftingPlanner.ViewModels"
+             xmlns:vm="clr-namespace:CraftingPlanner.UI.ViewModels.RecipeImport"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance vm:ItemListViewModel, IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance vm:RecipeListViewModel, IsDesignTimeCreatable=False}"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -34,10 +34,10 @@
         <DataGrid 
                     x:Name="CompareResultGrid" Grid.Row="1" IsReadOnly="true" SelectionMode="Single" SelectionUnit="FullRow" Margin="5,5,5,5" CanUserSortColumns="True"
                     AutoGenerateColumns="False" Grid.RowSpan="1"
-                    ItemsSource="{Binding Path=FilteredItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    ItemsSource="{Binding Path=ViewedRecipes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding Path=SelectedRecipe, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Output.Item.Name}" Header="Name" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Type.Name}" Header="Type" Width="auto" MinWidth="100"/>
                 <DataGridTextColumn Binding="{Binding Mod.Name}" Header="Mod" Width="auto" MinWidth="100"/>
             </DataGrid.Columns>
@@ -61,12 +61,11 @@
                 <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SearchControl}" VerticalContentAlignment="Center"
                          Text="{Binding Path=ItemNameFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=250}"/>
 
-                <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource SearchLabel}" Content="Item Type:"/>
+                <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource SearchLabel}" Content="Mod:"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" Style="{StaticResource SearchControl}"
-                          SelectedItem="{Binding Path=ItemTypeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          ItemsSource="{Binding Path=ItemTypes, Mode=OneWay}"
+                          SelectedItem="{Binding Path=ModFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          ItemsSource="{Binding Path=ItemNameFilter, Mode=OneWay}"
                           DisplayMemberPath="Name"/>
-
                 <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource SearchLabel}" Content="Mod:"/>
                 <ComboBox Grid.Row="2" Grid.Column="1" Style="{StaticResource SearchControl}"
                           SelectedItem="{Binding Path=ModFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -75,7 +74,6 @@
             </Grid>
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30">
                 <Button Margin="5" Content="Search Items" Command="{Binding Path=FilterCommand}" MinWidth="80"/>
-                <Button Margin="5" Content="Show As Ingredient" Command="{Binding Path=FindIngredientCommand}" MinWidth="80"/>
                 <Button Margin="5" Content="Reset" Command="{Binding Path=ClearFilterCommand}" MinWidth="80"/>
             </StackPanel>
         </Grid>

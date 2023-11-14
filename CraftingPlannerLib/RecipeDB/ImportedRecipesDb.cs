@@ -3,7 +3,8 @@ using DataImport;
 
 namespace CraftingPlannerLib.RecipeDB
 {
-    public class ImportedRecipesDb
+
+    public class ImportedRecipesDb : IImportedRecipesDb
     {
         public ItemService ItemService { get; }
 

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CraftingPlanner.ViewModels
+namespace CraftingPlanner.UI.ViewModels
 {
-    internal class MainViewModel : ViewModelBase
+    internal class MainViewModel : BaseViewModel
     {
-        
+
     }
 }
