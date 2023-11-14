@@ -24,5 +24,8 @@ namespace CraftingPlanner.UI.ViewModels
 
             return false;
         }
+
+        public static bool SetProperty<T>(BaseViewModel instance, ref T field, T newValue, [CallerMemberName] string? propertyName = null)
+            => instance.SetProperty<T>(ref field, newValue, propertyName);
     }
 }

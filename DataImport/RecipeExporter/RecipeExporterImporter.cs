@@ -86,13 +86,15 @@ namespace DataImport.RecipeExporter
             public ModLinker(int id, string modName)
             {
                 items = new HashSet<Models.Item>(BaseModelComparer.Default);
-                Mod = new Models.Mod(id, modName, items);
+                Mod = new Models.Mod(id, modName, Array.Empty<Models.Item>());
             }
 
             public void LinkItems(IEnumerable<Models.Item> items)
             {
                 if (items.Select(this.items.Add).Any(x => false))
                     throw new InvalidOperationException("Mod can't have the same item twice.");
+
+                Mod.SetItems(items);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using CraftingPlannerLib.RecipeDB;
 using DataImport.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -12,9 +13,9 @@ namespace CraftingPlanner.UI.ViewModels.RecipeImport
         private IReadOnlyList<Recipe> m_viewedRecipes;
         private Recipe? m_selectedRecipe;
 
-        private Mod? m_selectedModFilter;
-        private string? m_itemNameFilter;
-        private ItemStackType m_itemStackFilter;
+        private FilterProperty<Mod> m_selectedModFilter;
+        private FilterProperty<string> m_itemNameFilter;
+        private FilterProperty<ItemStackType> m_itemStackFilter;
 
         public IReadOnlyList<Recipe> ViewedRecipes
         {
@@ -27,6 +28,12 @@ namespace CraftingPlanner.UI.ViewModels.RecipeImport
                 base.SetProperty(ref m_viewedRecipes, value);
             }
         }
+
+        public IReadOnlyList<Mod> Mods
+        { get; }
+
+        public IReadOnlyList<ItemStackType> ItemStackTypes
+        { get; }
 
         public Recipe? SelectedRecipe
         {
@@ -44,11 +51,12 @@ namespace CraftingPlanner.UI.ViewModels.RecipeImport
         {
             get
             {
-                return m_selectedModFilter;
+                return m_selectedModFilter.Value;
             }
             set
             {
-                base.SetProperty(ref m_selectedModFilter, value);
+                if (m_selectedModFilter.SetValue(value))
+                    base.OnPropertyChanged();
             }
         }
 
@@ -56,11 +64,12 @@ namespace CraftingPlanner.UI.ViewModels.RecipeImport
         {
             get
             {
-                return m_itemNameFilter;
+                return m_itemNameFilter.Value;
             }
             set
             {
-                base.SetProperty(ref m_itemNameFilter, value);
+                if (m_itemNameFilter.SetValue(value))
+                    base.OnPropertyChanged();
             }
         }
 
@@ -68,11 +77,12 @@ namespace CraftingPlanner.UI.ViewModels.RecipeImport
         {
             get
             {
-                return m_itemStackFilter;
+                return m_itemStackFilter.Value;
             }
             set
             {
-                base.SetProperty(ref m_itemStackFilter, value);
+                if (m_itemStackFilter.SetValue(value))
+                    base.OnPropertyChanged();
             }
         }
 
@@ -82,10 +92,19 @@ namespace CraftingPlanner.UI.ViewModels.RecipeImport
 
         internal RecipeListViewModel(IImportedRecipesDb importedRecipes)
         {
+            m_itemStackFilter = new FilterProperty<ItemStackType>(ItemStackType.Output);
+
             m_importedRecipesDb = importedRecipes;
             m_viewedRecipes = importedRecipes.RecipeService
                 .GetAll()
                 .ToArray();
+
+            Mods = importedRecipes.ModService
+                .GetMods()
+                .ToArray();
+
+            ItemStackTypes = (ItemStackType[])Enum.GetValues(typeof(ItemStackType))
+                .Cast<ItemStackType>();
 
             FilterCommand = new RelayCommand(OnFilter);
             ClearFilterCommand = new RelayCommand(OnClearFilter);
@@ -93,6 +112,9 @@ namespace CraftingPlanner.UI.ViewModels.RecipeImport
 
         protected virtual void OnFilter(object? obj)
         {
+            if (m_selectedModFilter.IsDefault && m_itemNameFilter.IsDefault && m_itemStackFilter.IsDefault)
+                return;
+
             var filteredItems = m_importedRecipesDb.ItemService
                 .Find(ItemNameFilter, SelectedModFilter);
 
@@ -103,9 +125,9 @@ namespace CraftingPlanner.UI.ViewModels.RecipeImport
 
         protected virtual void OnClearFilter(object? obj)
         {
-            SelectedModFilter = null;
-            ItemNameFilter = null;
-            ItemStackFilter = ItemStackType.Output;
+            SelectedModFilter = m_selectedModFilter.DefaultValue;
+            ItemNameFilter = m_itemNameFilter.DefaultValue;
+            ItemStackFilter = m_itemStackFilter.DefaultValue;
 
             ViewedRecipes = m_importedRecipesDb.RecipeService
                 .GetAll()

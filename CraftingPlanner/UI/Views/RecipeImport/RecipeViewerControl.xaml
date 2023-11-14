@@ -37,9 +37,9 @@
                     ItemsSource="{Binding Path=ViewedRecipes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedItem="{Binding Path=SelectedRecipe, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Output.Item.Name}" Header="Name" Width="*"/>
-                <DataGridTextColumn Binding="{Binding Type.Name}" Header="Type" Width="auto" MinWidth="100"/>
-                <DataGridTextColumn Binding="{Binding Mod.Name}" Header="Mod" Width="auto" MinWidth="100"/>
+                <DataGridTextColumn Binding="{Binding Output.Item.Name}" Header="Recipe Output" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Output.Amount}" Header="Amount" Width="auto" MinWidth="75"/>
+                <DataGridTextColumn Binding="{Binding Output.Item.Mod.Name}" Header="Modpack" Width="auto" MinWidth="150"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="2">
@@ -63,14 +63,13 @@
 
                 <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource SearchLabel}" Content="Mod:"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" Style="{StaticResource SearchControl}"
-                          SelectedItem="{Binding Path=ModFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          ItemsSource="{Binding Path=ItemNameFilter, Mode=OneWay}"
+                          SelectedItem="{Binding Path=SelectedModFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          ItemsSource="{Binding Path=Mods, Mode=OneTime}"
                           DisplayMemberPath="Name"/>
-                <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource SearchLabel}" Content="Mod:"/>
+                <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource SearchLabel}" Content="Item Type:"/>
                 <ComboBox Grid.Row="2" Grid.Column="1" Style="{StaticResource SearchControl}"
-                          SelectedItem="{Binding Path=ModFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          ItemsSource="{Binding Path=Mods, Mode=OneWay}"
-                          DisplayMemberPath="Name"/>
+                          SelectedItem="{Binding Path=ItemStackFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          ItemsSource="{Binding Path=ItemStackTypes, Mode=OneTime}"/>
             </Grid>
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30">
                 <Button Margin="5" Content="Search Items" Command="{Binding Path=FilterCommand}" MinWidth="80"/>
