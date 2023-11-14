@@ -24,7 +24,9 @@ namespace CraftingPlanner
             var path = "D:\\Documents\\temp\\stoneblock.json";
             var importer = new RecipeExporterImporter();
 
-            var itemdb = await RecipeDatabase.Create(path);
+            var itemdb = await ImportedRecipesDb.Create(importer, path);
+
+            var result = itemdb.RecipeService.FindAll("iron ingot", ItemStackType.Output);
         }
 
         private async void Test2()

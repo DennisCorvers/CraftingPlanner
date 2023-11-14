@@ -2,7 +2,7 @@
 using DataImport.Models;
 namespace DataImport
 {
-    public sealed class RecipeDB
+    public sealed class RecipesImport
     {
         public IReadOnlyList<Recipe> Recipes { get; }
 
@@ -10,7 +10,7 @@ namespace DataImport
 
         public IReadOnlyList<Item> Items { get; }
 
-        public RecipeDB(IReadOnlyList<Recipe> recipes, IEnumerable<Mod> mods, IEnumerable<Item> items)
+        public RecipesImport(IReadOnlyList<Recipe> recipes, IEnumerable<Mod> mods, IEnumerable<Item> items)
         {
             Recipes = recipes;
             Mods = new List<Mod>(mods);

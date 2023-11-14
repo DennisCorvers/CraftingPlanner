@@ -6,7 +6,7 @@ namespace DataImport.RecipeExporter
 {
     public class RecipeExporterImporter : IDataImporter
     {
-        public async Task<RecipeDB> Import(string path)
+        public async Task<RecipesImport> Import(string path)
         {
             var importData = await ReadAsync<ExportData>(path);
 
@@ -18,7 +18,7 @@ namespace DataImport.RecipeExporter
             var itemLookup = new Func<int, Models.Item>(x => indexes.ItemIndex[x]);
             var recipes = importData.Recipes.Select(x => MapRecipe(x, itemLookup));
 
-            return new RecipeDB(
+            return new RecipesImport(
                 recipes.ToList(),
                 indexes.ModIndex.Values,
                 indexes.ItemIndex.Values);

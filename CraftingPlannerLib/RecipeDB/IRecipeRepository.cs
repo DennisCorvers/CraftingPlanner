@@ -5,6 +5,10 @@ namespace CraftingPlannerLib.RecipeDB
 {
     public interface IRecipeRepository : IReadonlyRepository<Recipe>
     {
-        IEnumerable<Recipe> Find(string itemName, string modName);
+        IEnumerable<Recipe> FindAsInput(Item inputItem);
+
+        IEnumerable<Recipe> FindAsOutput(Item outputItem);
+
+        IEnumerable<Recipe> FindRelated(Item relatedItem);
     }
 }

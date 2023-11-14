@@ -2,6 +2,6 @@
 {
     public interface IDataImporter
     {
-        Task<RecipeDB> Import(string filePath);
+        Task<RecipesImport> Import(string filePath);
     }
 }

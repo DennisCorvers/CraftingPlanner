@@ -5,7 +5,7 @@ namespace CraftingPlannerLib.RecipeDB
     internal class ItemRepository : IItemRepository
     {
         private readonly IReadOnlyList<Item> m_items;
-        private readonly ILookup<string, Item> m_lookup;
+        private readonly ILookup<string, Item> m_nameIndex;
 
         public IEnumerable<Item> Entities
             => m_items;
@@ -16,10 +16,14 @@ namespace CraftingPlannerLib.RecipeDB
                 .OrderBy(x => x.Name)
                 .ToList();
 
-            m_lookup = items.ToLookup(x => x.Name, StringComparer.OrdinalIgnoreCase);
+            m_nameIndex = items
+                .ToLookup(x => x.Name, StringComparer.OrdinalIgnoreCase);
         }
 
         public IEnumerable<Item> Find(string name)
-            => m_lookup[name];
+            => m_nameIndex[name];
+
+        public IEnumerable<Item> NameContains(string name)
+            => Entities.Where(x => x.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
     }
 }

@@ -6,7 +6,7 @@ namespace CraftingPlannerLib.RecipeDB
     internal class ModRepository : IModRepository
     {
         private readonly IReadOnlyList<Mod> m_mods;
-        private readonly IDictionary<string, Mod> m_modLookup;
+        private readonly IDictionary<string, Mod> m_nameIndex;
 
         public IEnumerable<Mod> Entities
             => m_mods;
@@ -17,12 +17,13 @@ namespace CraftingPlannerLib.RecipeDB
                 .OrderBy(m => m.Name)
                 .ToList();
 
-            m_modLookup = mods.ToDictionary(k => k.Name, m => m, StringComparer.OrdinalIgnoreCase);
+            m_nameIndex = mods
+                .ToDictionary(k => k.Name, m => m, StringComparer.OrdinalIgnoreCase);
         }
 
         public Mod? Find(string name)
         {
-            m_modLookup.TryGetValue(name, out Mod? mod);
+            m_nameIndex.TryGetValue(name, out Mod? mod);
             return mod;
         }
     }
