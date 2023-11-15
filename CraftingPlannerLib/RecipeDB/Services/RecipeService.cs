@@ -42,50 +42,13 @@ namespace CraftingPlannerLib.RecipeDB.Services
 
         public IEnumerable<Recipe> FindAll(IEnumerable<Item> items, ItemStackType itemStackType)
         {
-            var recipes = itemStackType switch
+            return itemStackType switch
             {
-                ItemStackType.Input => items.SelectMany(x => m_recipeRepository.FindAsInput(x)),
-                ItemStackType.Output => items.SelectMany(x => m_recipeRepository.FindAsOutput(x)),
-                ItemStackType.Any => items.SelectMany(x => m_recipeRepository.FindRelated(x)),
+                ItemStackType.Input => m_recipeRepository.FindAsInput(items),
+                ItemStackType.Output => m_recipeRepository.FindAsOutput(items),
+                ItemStackType.Any => m_recipeRepository.FindRelated(items),
                 _ => throw new InvalidOperationException()
             };
-
-            return recipes.Distinct(RecipeEqualityComparer.Default);
-        }
-
-        private class RecipeEqualityComparer : IEqualityComparer<Recipe>
-        {
-            public static IEqualityComparer<Recipe> Default { get; } = new RecipeEqualityComparer();
-
-            public bool Equals(Recipe? x, Recipe? y)
-            {
-                if (ReferenceEquals(x, y))
-                    return true;
-
-                if (y is null || x is null)
-                    return false;
-
-                return x.Output.Equals(y.Output)
-                    && x.Input.SequenceEqual(y.Input);
-            }
-
-            public int GetHashCode([DisallowNull] Recipe obj)
-            {
-                return HashCode.Combine(obj.Output, ListHash(obj.Input));
-            }
-
-            private static int ListHash(IEnumerable<ItemStack> items)
-            {
-                unchecked
-                {
-                    int hash = 19;
-                    foreach (var item in items)
-                    {
-                        hash = hash * 31 + item.GetHashCode();
-                    }
-                    return hash;
-                }
-            }
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿using DataImport.EqualityComparers;
-using DataImport.Models;
+﻿using DataImport.Models;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace CraftingPlannerLib.RecipeDB
 {
@@ -27,19 +28,38 @@ namespace CraftingPlannerLib.RecipeDB
         }
 
         public IEnumerable<Recipe> FindAsOutput(Item outputItem)
-        {
-            return m_outputIndex[outputItem];
-        }
+            => FormatRecipesLookup(m_outputIndex[outputItem]);
+
+        public IEnumerable<Recipe> FindAsOutput(IEnumerable<Item> outputItems)
+            => FormatRecipesLookup(outputItems.SelectMany(x => m_outputIndex[x]));
 
         public IEnumerable<Recipe> FindAsInput(Item inputItem)
-        {
-            return m_inputIndex[inputItem];
-        }
+            => FormatRecipesLookup(m_inputIndex[inputItem]);
+
+        public IEnumerable<Recipe> FindAsInput(IEnumerable<Item> inputItems)
+            => FormatRecipesLookup(inputItems.SelectMany(x => m_inputIndex[x]));
 
         public IEnumerable<Recipe> FindRelated(Item relatedItem)
         {
-            return m_inputIndex[relatedItem]
-                .Concat(m_outputIndex[relatedItem]);
+            return FormatRecipesLookup(
+                    m_outputIndex[relatedItem]
+                    .Concat(m_inputIndex[relatedItem]));
+        }
+
+        public IEnumerable<Recipe> FindRelated(IEnumerable<Item> relatedItems)
+        {
+            var allItems = relatedItems.SelectMany(x => m_inputIndex[x])
+                .Concat(relatedItems.SelectMany(x => m_outputIndex[x]));
+
+            return FormatRecipesLookup(allItems);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static IEnumerable<Recipe> FormatRecipesLookup(IEnumerable<Recipe> rawValues)
+        {
+            return rawValues
+            .DistinctBy(x => x.Id)
+            .OrderBy(x => x.Output.Item.Name);
         }
 
         private static IEnumerable<RecipeIndexItem> CreateInputIndex(IEnumerable<Recipe> recipes)
@@ -51,10 +71,10 @@ namespace CraftingPlannerLib.RecipeDB
 
             static IEnumerable<RecipeIndexItem> ExpandInput(Recipe parent, ItemStack input)
             {
-                var indexInput = new[] { new RecipeIndexItem(input.Item, parent) };
+                IEnumerable<RecipeIndexItem> indexInput = new[] { new RecipeIndexItem(input.Item, parent) };
                 if (input is AlternativeItemStack aStack)
                 {
-                    indexInput.Concat(aStack.AlternativeItems.Select(x => new RecipeIndexItem(x, parent)));
+                    indexInput = indexInput.Concat(aStack.AlternativeItems.Select(x => new RecipeIndexItem(x, parent)));
                 }
 
                 return indexInput;
@@ -68,17 +88,18 @@ namespace CraftingPlannerLib.RecipeDB
 
         private record struct RecipeIndexItem(Item item, Recipe parent);
 
+        /// <summary>
+        /// Comparer used to create (Item -> Recipe) indexes
+        /// </summary>
         private class ItemEqualityComparer : IEqualityComparer<Item>
         {
-            public static ItemEqualityComparer Default = new ItemEqualityComparer();
+            public static ItemEqualityComparer Default { get; } = new ItemEqualityComparer();
 
             public bool Equals(Item? x, Item? y)
             {
-                if (ReferenceEquals(x, y))
-                    return true;
-
-                if (y is null || x is null)
-                    return false;
+                // This can't ever happen!
+                // Recipe Input and Output items are not nullable.
+                Debug.Assert(x != null && y != null);
 
                 return x.ID == y.ID;
             }

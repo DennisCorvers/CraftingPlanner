@@ -6,12 +6,15 @@ namespace DataImport.Models
     [DebuggerDisplay("{Output}")]
     public class Recipe
     {
+        public int Id { get; }
+
         public IReadOnlySet<ItemStack> Input { get; }
 
         public ItemStack Output { get; }
 
-        public Recipe(IEnumerable<ItemStack> input, ItemStack output)
+        public Recipe(int id, IEnumerable<ItemStack> input, ItemStack output)
         {
+            Id = id;
             Input = new HashSet<ItemStack>(input);
             Output = output;
         }

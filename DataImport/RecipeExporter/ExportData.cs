@@ -16,7 +16,8 @@ namespace DataImport.RecipeExporter
             [JsonProperty("Mods")] Dictionary<int, string> mods,
             [JsonProperty("Items")] Dictionary<int, Item> items)
         {
-            Recipes = recipes;
+            // Distinct recipes to trim any duplicate recipes.
+            Recipes = recipes.Distinct(Comparers.RecipeComparer.Default).ToArray();
             ModLookup = mods;
             ItemLookup = items;
         }

@@ -16,7 +16,7 @@ namespace DataImport.RecipeExporter
             var indexes = BuildIndexes(importData);
 
             var itemLookup = new Func<int, Models.Item>(x => indexes.ItemIndex[x]);
-            var recipes = importData.Recipes.Select(x => MapRecipe(x, itemLookup));
+            var recipes = importData.Recipes.Select((x, id) => MapRecipe(id, x, itemLookup));
 
             return new RecipesImport(
                 recipes.ToList(),
@@ -24,22 +24,22 @@ namespace DataImport.RecipeExporter
                 indexes.ItemIndex.Values);
         }
 
-        private static Models.Recipe MapRecipe(Recipe recipe, Func<int, Models.Item> itemLookup)
+        private static Models.Recipe MapRecipe(int uid, Recipe recipe, Func<int, Models.Item> itemLookup)
         {
-            var output = MapItemStack(recipe.Output, itemLookup);
-            var input = recipe.Input.Select(x => MapItemStack(x, itemLookup));
+            var output = ItemStackFactory(recipe.Output, itemLookup);
+            var input = recipe.Input.Select(x => ItemStackFactory(x, itemLookup));
 
-            return new Models.Recipe(input, output);
+            return new Models.Recipe(uid, input, output);
         }
 
-        private static Models.ItemStack MapItemStack(ItemStack itemStack, Func<int, Models.Item> itemLookup)
+        private static Models.ItemStack ItemStackFactory(ItemStack itemStack, Func<int, Models.Item> itemLookup)
         {
-            if (itemStack is AlternativeItemStack aItemStack)
+            if (itemStack.AlternativeItemIds != null)
             {
-                var alternativeItems = aItemStack.AlternativeItemIds.Select(x => itemLookup(x));
+                var alternativeItems = itemStack.AlternativeItemIds.Select(x => itemLookup(x));
                 return new Models.AlternativeItemStack(
-                    itemLookup(aItemStack.ItemID),
-                    aItemStack.Amount,
+                    itemLookup(itemStack.ItemID),
+                    itemStack.Amount,
                     alternativeItems);
             }
             else
