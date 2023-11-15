@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
-namespace CraftingPlanner.UI.ViewModels.RecipeImport
+namespace CraftingPlanner.Presentation.ViewModels.RecipeImport
 {
     internal class RecipeListViewModel : BaseViewModel
     {
@@ -16,6 +16,8 @@ namespace CraftingPlanner.UI.ViewModels.RecipeImport
         private FilterProperty<Mod> m_selectedModFilter;
         private FilterProperty<string> m_itemNameFilter;
         private FilterProperty<ItemStackType> m_itemStackFilter;
+
+        public event Action<Recipe?>? SelectedRecipeChanged;
 
         public IReadOnlyList<Recipe> ViewedRecipes
         {
@@ -43,7 +45,8 @@ namespace CraftingPlanner.UI.ViewModels.RecipeImport
             }
             set
             {
-                base.SetProperty(ref m_selectedRecipe, value);
+                if (base.SetProperty(ref m_selectedRecipe, value))
+                    SelectedRecipeChanged?.Invoke(value);
             }
         }
 

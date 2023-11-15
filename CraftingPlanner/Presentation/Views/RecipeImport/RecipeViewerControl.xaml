@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CraftingPlanner.Views"
-             xmlns:vm="clr-namespace:CraftingPlanner.UI.ViewModels.RecipeImport"
+             xmlns:vm="clr-namespace:CraftingPlanner.Presentation.ViewModels.RecipeImport"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance vm:RecipeListViewModel, IsDesignTimeCreatable=False}"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -28,7 +28,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Height="25" Margin="5,0,0,0">
-            <Label DockPanel.Dock="Left" Content="Item list"/>
+            <Label DockPanel.Dock="Left" Content="Imported Recipes"/>
             <Separator/>
         </DockPanel>
         <DataGrid 

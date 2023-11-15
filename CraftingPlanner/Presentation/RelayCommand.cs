@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace CraftingPlanner.UI
+namespace CraftingPlanner.Presentation
 {
     internal class RelayCommand : ICommand
     {

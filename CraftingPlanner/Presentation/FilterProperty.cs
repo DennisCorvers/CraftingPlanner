@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CraftingPlanner.UI
+namespace CraftingPlanner.Presentation
 {
     internal struct FilterProperty<T>
     {

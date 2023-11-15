@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace CraftingPlanner.UI.ViewModels
+namespace CraftingPlanner.Presentation.ViewModels
 {
     internal abstract class BaseViewModel : INotifyPropertyChanged
     {

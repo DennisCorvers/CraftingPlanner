@@ -1,4 +1,4 @@
-﻿using CraftingPlanner.UI.ViewModels.RecipeImport;
+﻿using CraftingPlanner.Presentation.ViewModels.RecipeImport;
 using CraftingPlannerLib.RecipeDB;
 using DataImport;
 using DataImport.RecipeExporter;

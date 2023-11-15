@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CraftingPlanner.UI.ViewModels
+namespace CraftingPlanner.Presentation.ViewModels
 {
     internal class MainViewModel : BaseViewModel
     {
