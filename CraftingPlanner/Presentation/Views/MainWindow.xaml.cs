@@ -26,7 +26,7 @@ namespace CraftingPlanner
             this.ItemListControl.DataContext = new RecipeListViewModel(data);
         }
 
-        private async Task<ImportedRecipesDb> Test()
+        private async Task<IImportedRecipesDb> Test()
         {
             var path = "D:\\Documents\\temp\\stoneblock.json";
             var importer = new RecipeExporterImporter();

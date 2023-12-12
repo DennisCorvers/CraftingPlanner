@@ -1,4 +1,5 @@
 ﻿using CraftingPlannerLib.RecipeDB;
+using CraftingPlannerLib.RecipeDB.Models;
 using DataImport.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace CraftingPlanner.Presentation.ViewModels.RecipeImport
     internal class RecipeListViewModel : BaseViewModel
     {
         private IImportedRecipesDb m_importedRecipesDb;
-        private IReadOnlyList<Recipe> m_viewedRecipes;
+        private IReadOnlyList<RecipeGrouping> m_viewedRecipes;
         private Recipe? m_selectedRecipe;
 
         private FilterProperty<Mod> m_selectedModFilter;
@@ -19,7 +20,7 @@ namespace CraftingPlanner.Presentation.ViewModels.RecipeImport
 
         public event Action<Recipe?>? SelectedRecipeChanged;
 
-        public IReadOnlyList<Recipe> ViewedRecipes
+        public IReadOnlyList<RecipeGrouping> ViewedRecipes
         {
             get
             {

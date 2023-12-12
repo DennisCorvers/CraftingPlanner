@@ -1,4 +1,4 @@
-﻿namespace CraftingPlannerLib.RecipeDB
+﻿namespace CraftingPlannerLib.RecipeDB.Models
 {
     public enum ItemStackType
     {

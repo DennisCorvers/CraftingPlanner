@@ -1,4 +1,5 @@
-﻿using DataImport.EqualityComparers;
+﻿using CraftingPlannerLib.RecipeDB.Models;
+using DataImport.EqualityComparers;
 using DataImport.Models;
 using System.Diagnostics.CodeAnalysis;
 
@@ -17,15 +18,15 @@ namespace CraftingPlannerLib.RecipeDB.Services
             m_recipeRepository = recipeRepository;
         }
 
-        public IEnumerable<Recipe> GetAll()
-            => m_recipeRepository.Entities;
+        public IEnumerable<RecipeGrouping> GetAll()
+            => m_recipeRepository.GetAll();
 
-        public IEnumerable<Recipe> MatchRecipes(string itemName, string modName, ItemStackType itemStackType)
+        public IEnumerable<RecipeGrouping> MatchRecipes(string itemName, string modName, ItemStackType itemStackType)
         {
             var mod = m_modRepository.Find(modName);
 
             if (mod == null)
-                return Enumerable.Empty<Recipe>();
+                return Enumerable.Empty<RecipeGrouping>();
 
             var items = m_itemRepository
                 .Find(itemName)
@@ -34,13 +35,13 @@ namespace CraftingPlannerLib.RecipeDB.Services
             return FindAll(items, itemStackType);
         }
 
-        public IEnumerable<Recipe> FindAll(string partialItemName, ItemStackType itemStackType)
+        public IEnumerable<RecipeGrouping> FindAll(string partialItemName, ItemStackType itemStackType)
         {
             var items = m_itemRepository.NameContains(partialItemName);
             return FindAll(items, itemStackType);
         }
 
-        public IEnumerable<Recipe> FindAll(IEnumerable<Item> items, ItemStackType itemStackType)
+        public IEnumerable<RecipeGrouping> FindAll(IEnumerable<Item> items, ItemStackType itemStackType)
         {
             return itemStackType switch
             {

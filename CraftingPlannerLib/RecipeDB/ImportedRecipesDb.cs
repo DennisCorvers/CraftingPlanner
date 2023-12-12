@@ -23,7 +23,7 @@ namespace CraftingPlannerLib.RecipeDB
             RecipeService = new RecipeService(modRepo, itemRepo, recipeRepo);
         }
 
-        public static async Task<ImportedRecipesDb> Create(IDataImporter importer, string filePath)
+        public static async Task<IImportedRecipesDb> Create(IDataImporter importer, string filePath)
         {
             var data = await importer.Import(filePath);
             return new ImportedRecipesDb(data);

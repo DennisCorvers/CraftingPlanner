@@ -26,7 +26,7 @@ namespace DataImport.RecipeExporter
 
         private static Models.Recipe MapRecipe(int uid, Recipe recipe, Func<int, Models.Item> itemLookup)
         {
-            var output = ItemStackFactory(recipe.Output, itemLookup);
+            var output = new Models.ItemStack[1] { ItemStackFactory(recipe.Output, itemLookup) };
             var input = recipe.Input.Select(x => ItemStackFactory(x, itemLookup));
 
             return new Models.Recipe(uid, input, output);

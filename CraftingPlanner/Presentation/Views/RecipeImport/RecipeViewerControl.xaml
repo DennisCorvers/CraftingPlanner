@@ -33,13 +33,13 @@
         </DockPanel>
         <DataGrid 
                     x:Name="CompareResultGrid" Grid.Row="1" IsReadOnly="true" SelectionMode="Single" SelectionUnit="FullRow" Margin="5,5,5,5" CanUserSortColumns="True"
-                    AutoGenerateColumns="False" Grid.RowSpan="1"
+                    CanUserAddRows="False" AutoGenerateColumns="False" Grid.RowSpan="1"
                     ItemsSource="{Binding Path=ViewedRecipes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedItem="{Binding Path=SelectedRecipe, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Output.Item.Name}" Header="Recipe Output" Width="*"/>
-                <DataGridTextColumn Binding="{Binding Output.Amount}" Header="Amount" Width="auto" MinWidth="75"/>
-                <DataGridTextColumn Binding="{Binding Output.Item.Mod.Name}" Header="Modpack" Width="auto" MinWidth="150"/>
+                <DataGridTextColumn Binding="{Binding Item.Name}" Header="Recipe Output" Width="*"/>
+                <DataGridTextColumn Binding="{Binding RecipeCount}" Header="Recipes" Width="auto"/>
+                <DataGridTextColumn Binding="{Binding Item.Mod.Name}" Header="Modpack" Width="auto" MinWidth="150"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="2">
