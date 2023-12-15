@@ -1,7 +1,9 @@
 ﻿using CraftingPlanner.Presentation.ViewModels.RecipeImport;
 using CraftingPlannerLib.RecipeDB;
+using CraftingPlannerLib.RecipeDB.Models;
 using DataImport;
 using DataImport.RecipeExporter;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,7 +25,17 @@ namespace CraftingPlanner
         private async void Initialize()
         {
             var data = await Test();
-            this.ItemListControl.DataContext = new RecipeListViewModel(data);
+
+            var recipeListVM = new RecipeListViewModel(data);
+            var detailVM = new RecipeDetailViewModel();
+
+            recipeListVM.SelectedRecipeChanged += new Action<RecipeGrouping?>((x) =>
+            {
+                detailVM.Recipes = x?.Recipes!;
+            });
+
+            this.ItemListControl.DataContext = recipeListVM;
+            this.RecipeDetailControl.DataContext = detailVM;
         }
 
         private async Task<IImportedRecipesDb> Test()

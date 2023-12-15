@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CraftingPlanner" xmlns:views="clr-namespace:CraftingPlanner.Views"
+        xmlns:views="clr-namespace:CraftingPlanner.Presentation.Views.RecipeImport"
         mc:Ignorable="d"
-        Title="Crafting Planner" Height="450" Width="800" 
-        >
+        Title="Crafting Planner" Height="800" Width="800">
     <Grid>
-        <views:ItemListControl x:Name="ItemListControl"></views:ItemListControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <views:RecipeViewerControl x:Name="ItemListControl" Grid.Row="0"/>
+        <views:RecipeDetailControl x:Name="RecipeDetailControl" Grid.Row="1"/>
     </Grid>
 </Window>
 

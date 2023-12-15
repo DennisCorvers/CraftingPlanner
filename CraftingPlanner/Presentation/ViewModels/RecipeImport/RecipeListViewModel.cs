@@ -12,13 +12,13 @@ namespace CraftingPlanner.Presentation.ViewModels.RecipeImport
     {
         private IImportedRecipesDb m_importedRecipesDb;
         private IReadOnlyList<RecipeGrouping> m_viewedRecipes;
-        private Recipe? m_selectedRecipe;
+        private RecipeGrouping? m_selectedRecipe;
 
         private FilterProperty<Mod> m_selectedModFilter;
         private FilterProperty<string> m_itemNameFilter;
         private FilterProperty<ItemStackType> m_itemStackFilter;
 
-        public event Action<Recipe?>? SelectedRecipeChanged;
+        public event Action<RecipeGrouping?>? SelectedRecipeChanged;
 
         public IReadOnlyList<RecipeGrouping> ViewedRecipes
         {
@@ -38,7 +38,7 @@ namespace CraftingPlanner.Presentation.ViewModels.RecipeImport
         public IReadOnlyList<ItemStackType> ItemStackTypes
         { get; }
 
-        public Recipe? SelectedRecipe
+        public RecipeGrouping? SelectedRecipe
         {
             get
             {

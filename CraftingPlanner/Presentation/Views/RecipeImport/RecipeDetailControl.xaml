@@ -3,12 +3,60 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CraftingPlanner.Views"
-             xmlns:vm="clr-namespace:CraftingPlanner.Presentation.ViewModels.RecipeImport"
+             xmlns:vm="clr-namespace:CraftingPlanner.Presentation.ViewModels.RecipeImport" xmlns:controls="clr-namespace:CraftingPlanner.Presentation.Controls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance vm:RecipeDetailViewModel, IsDesignTimeCreatable=False}"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        https://stackoverflow.com/questions/3829137/i-need-the-expand-collapse-for-rowdetailstemplate
+             d:DesignHeight="350" d:DesignWidth="500">
+
+    <Grid Grid.Column="1">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="CategoryTab"         Height="auto"/>
+            <RowDefinition x:Name="CategoryCount"       Height="auto"/>
+            <RowDefinition x:Name="InputHeader"         Height="auto"/>
+            <RowDefinition x:Name="InputGrid"           Height="*"/>
+            <RowDefinition x:Name="OutputHeader"        Height="auto"/>
+            <RowDefinition x:Name="OutputGrid"          Height="*"/>
+            <RowDefinition x:Name="RecipeDetails"       Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="RecipeTypeNagivator" Grid.Row="0" Margin="3" Visibility="Collapsed">
+            <controls:TabNavigator/>
+        </Grid>
+        <Grid x:Name="RecipePageNavigator" Grid.Row="1" Margin="3">
+            <controls:TabNavigator
+                NavigateNext="{Binding Path=Next}"
+                NavigatePrevious="{Binding Path=Previous}"
+                CanNavigate="{Binding Path=CanNavigate, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                <controls:TabNavigator.HeaderText>
+                    <MultiBinding StringFormat="{}{0}/{1}">
+                        <Binding Path="PageNumber"  Mode="OneWay" UpdateSourceTrigger="PropertyChanged" FallbackValue="1"/>
+                        <Binding Path="Count"       Mode="OneWay" UpdateSourceTrigger="PropertyChanged" FallbackValue="1"/>
+                    </MultiBinding>
+                </controls:TabNavigator.HeaderText>
+            </controls:TabNavigator>
+        </Grid>
+        <DockPanel Grid.Row="2" Height="25" Margin="5,0,0,0">
+            <Label DockPanel.Dock="Left" Content="Inputs"/>
+            <Separator/>
+        </DockPanel>
+        <DataGrid x:Name="Inputs" Grid.Row="3" SelectionMode="Single" CanUserAddRows="False" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=Current.Input, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Amount}"          Header="Amount" Width="60"/>
+                <DataGridTextColumn Binding="{Binding Item.Name}"       Header="Item"   Width="*"/>
+                <DataGridTextColumn Binding="{Binding Item.Mod.Name}"   Header="Mod"    Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DockPanel Grid.Row="4" Height="25" Margin="5,0,0,0">
+            <Label DockPanel.Dock="Left" Content="Outputs"/>
+            <Separator/>
+        </DockPanel>
+        <DataGrid x:Name="Outputs" Grid.Row="5" SelectionMode="Single" CanUserAddRows="False" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=Current.Output, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Amount}"          Header="Amount" Width="60"/>
+                <DataGridTextColumn Binding="{Binding Item.Name}"       Header="Item"   Width="*"/>
+                <DataGridTextColumn Binding="{Binding Item.Mod.Name}"   Header="Mod"    Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
