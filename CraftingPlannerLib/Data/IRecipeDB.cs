@@ -1,8 +1,8 @@
-﻿using CraftingPlannerLib.RecipeDB.Services;
+﻿using CraftingPlannerLib.Services;
 
 namespace CraftingPlannerData
 {
-    public interface IImportedRecipesDb
+    public interface IRecipeDB
     {
         ItemService ItemService { get; }
         ModService ModService { get; }

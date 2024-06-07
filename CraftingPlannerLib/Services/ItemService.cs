@@ -1,7 +1,7 @@
 ﻿using CraftingPlannerLib.Data;
 using CraftingPlannerLib.Models;
 
-namespace CraftingPlannerLib.RecipeDB.Services
+namespace CraftingPlannerLib.Services
 {
     public class ItemService
     {

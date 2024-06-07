@@ -1,11 +1,10 @@
 ﻿using CraftingPlannerData.Repositories;
-using CraftingPlannerLib.RecipeDB;
-using CraftingPlannerLib.RecipeDB.Services;
+using CraftingPlannerLib.Services;
 using DataImport;
 
 namespace CraftingPlannerData
 {
-    public class ImportedRecipesDb : IImportedRecipesDb
+    public class ImportedRecipesDb : IRecipeDB
     {
         public ItemService ItemService { get; }
 
@@ -20,7 +19,7 @@ namespace CraftingPlannerData
             RecipeService = recipeService;
         }
 
-        public static async Task<IImportedRecipesDb> Create(IDataImporter importer)
+        public static async Task<IRecipeDB> Create(IDataImporter importer)
         {
             var data = await importer.Import();
 

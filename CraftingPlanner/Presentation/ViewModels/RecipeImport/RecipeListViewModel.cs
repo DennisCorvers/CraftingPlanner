@@ -10,7 +10,7 @@ namespace CraftingPlanner.Presentation.ViewModels.RecipeImport
 {
     internal class RecipeListViewModel : BaseViewModel
     {
-        private IImportedRecipesDb m_importedRecipesDb;
+        private IRecipeDB m_importedRecipesDb;
         private IReadOnlyList<RecipeGrouping> m_viewedRecipes;
         private RecipeGrouping? m_selectedRecipe;
 
@@ -94,7 +94,7 @@ namespace CraftingPlanner.Presentation.ViewModels.RecipeImport
 
         public ICommand ClearFilterCommand { get; }
 
-        internal RecipeListViewModel(IImportedRecipesDb importedRecipes)
+        internal RecipeListViewModel(IRecipeDB importedRecipes)
         {
             m_itemStackFilter = new FilterProperty<ItemStackType>(ItemStackType.Output);
 

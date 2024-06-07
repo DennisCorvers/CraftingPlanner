@@ -15,12 +15,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="protobuf-net.Core" Version="3.2.26" />
+    <Compile Remove="Calculation\**" />
+    <EmbeddedResource Remove="Calculation\**" />
+    <None Remove="Calculation\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Calculation\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="protobuf-net.Core" Version="3.2.26" />
   </ItemGroup>
 
 </Project>
