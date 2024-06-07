@@ -36,6 +36,9 @@ namespace CraftingPlannerData.Repositories
                 });
         }
 
+        public RecipeGrouping FindAsOutput(Item outputItem)
+            => new RecipeGrouping(outputItem, m_outputIndex[outputItem]);
+
         public IEnumerable<RecipeGrouping> FindAsInput(IEnumerable<Item> inputItems)
         {
             return inputItems

@@ -12,5 +12,7 @@ namespace CraftingPlannerLib.Data
         IEnumerable<RecipeGrouping> FindAsOutput(IEnumerable<Item> outputItems);
 
         IEnumerable<RecipeGrouping> FindRelated(IEnumerable<Item> relatedItems);
+
+        RecipeGrouping FindAsOutput(Item outputItem);
     }
 }
