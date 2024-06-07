@@ -1,4 +1,6 @@
-﻿using DataImport.Models;
+﻿
+
+using CraftingPlannerLib.Models;
 
 namespace CraftingPlannerLib.RecipeDB.Models
 {

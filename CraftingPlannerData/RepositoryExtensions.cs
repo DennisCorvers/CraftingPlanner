@@ -1,8 +1,8 @@
-﻿using CraftingPlannerLib.RecipeDB.EqualityComparers;
+﻿using CraftingPlannerData.EqualityComparers;
+using CraftingPlannerLib.Models;
 using CraftingPlannerLib.RecipeDB.Models;
-using DataImport.Models;
 
-namespace CraftingPlannerLib.RecipeDB
+namespace CraftingPlannerData
 {
     public static class RepositoryExtensions
     {

@@ -1,7 +1,10 @@
-﻿using DataImport.EqualityComparers;
-using DataImport.Models;
+﻿using CraftingPlannerLib.Models;
+
 namespace DataImport
 {
+    /// <summary>
+    /// Readonly data that represents a recipe data import.
+    /// </summary>
     public sealed class RecipesImport
     {
         public IReadOnlyList<Recipe> Recipes { get; }

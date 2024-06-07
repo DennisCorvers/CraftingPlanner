@@ -1,7 +1,6 @@
-﻿using DataImport.EqualityComparers;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
-namespace DataImport.Models
+namespace CraftingPlannerLib.Models
 {
     [DebuggerDisplay("{FirstOutput}")]
     public class Recipe

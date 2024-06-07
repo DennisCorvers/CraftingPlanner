@@ -1,5 +1,4 @@
-﻿using DataImport.Models;
-using DataImport.Utils;
+﻿using CraftingPlannerLib.Utils;
 using System.Diagnostics.CodeAnalysis;
 
 namespace DataImport.RecipeExporter.Comparers

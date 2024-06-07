@@ -1,4 +1,5 @@
-﻿using DataImport.Models;
+﻿using CraftingPlannerLib.Data;
+using CraftingPlannerLib.Models;
 
 namespace CraftingPlannerLib.RecipeDB.Services
 {
@@ -6,7 +7,7 @@ namespace CraftingPlannerLib.RecipeDB.Services
     {
         private readonly IItemRepository m_itemRepository;
 
-        internal ItemService(IItemRepository itemRepository)
+        public ItemService(IItemRepository itemRepository)
         {
             m_itemRepository = itemRepository;
         }

@@ -1,9 +1,10 @@
-﻿using DataImport.Models;
+﻿
+using CraftingPlannerLib.Models;
 using System.Diagnostics.CodeAnalysis;
 
-namespace DataImport.EqualityComparers
+namespace CraftingPlannerLib.EqualityComparers
 {
-    internal class BaseModelComparer : IEqualityComparer<BaseModel>
+    public class BaseModelComparer : IEqualityComparer<BaseModel>
     {
         public static IEqualityComparer<BaseModel> Default { get; } = new BaseModelComparer();
 

@@ -1,7 +1,7 @@
-﻿using DataImport.EqualityComparers;
+﻿using CraftingPlannerLib.EqualityComparers;
 using System.Diagnostics;
 
-namespace DataImport.Models
+namespace CraftingPlannerLib.Models
 {
     [DebuggerDisplay("{Amount} {Item}")]
     public record class ItemStack

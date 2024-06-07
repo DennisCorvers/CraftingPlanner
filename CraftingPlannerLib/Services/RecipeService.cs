@@ -1,7 +1,6 @@
-﻿using CraftingPlannerLib.RecipeDB.Models;
-using DataImport.EqualityComparers;
-using DataImport.Models;
-using System.Diagnostics.CodeAnalysis;
+﻿using CraftingPlannerLib.Data;
+using CraftingPlannerLib.Models;
+using CraftingPlannerLib.RecipeDB.Models;
 
 namespace CraftingPlannerLib.RecipeDB.Services
 {
@@ -11,7 +10,7 @@ namespace CraftingPlannerLib.RecipeDB.Services
         private readonly IItemRepository m_itemRepository;
         private readonly IRecipeRepository m_recipeRepository;
 
-        internal RecipeService(IModRepository modRepository, IItemRepository itemRepository, IRecipeRepository recipeRepository)
+        public RecipeService(IModRepository modRepository, IItemRepository itemRepository, IRecipeRepository recipeRepository)
         {
             m_modRepository = modRepository;
             m_itemRepository = itemRepository;

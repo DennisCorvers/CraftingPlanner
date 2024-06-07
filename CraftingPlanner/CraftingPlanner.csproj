@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CraftingPlannerData\CraftingPlannerData.csproj" />
     <ProjectReference Include="..\CraftingPlannerLib\CraftingPlannerLib.csproj" />
     <ProjectReference Include="..\DataImport\DataImport.csproj" />
   </ItemGroup>

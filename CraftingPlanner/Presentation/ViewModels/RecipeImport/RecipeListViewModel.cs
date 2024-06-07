@@ -1,6 +1,6 @@
-﻿using CraftingPlannerLib.RecipeDB;
+﻿using CraftingPlannerData;
+using CraftingPlannerLib.Models;
 using CraftingPlannerLib.RecipeDB.Models;
-using DataImport.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

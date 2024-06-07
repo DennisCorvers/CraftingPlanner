@@ -1,7 +1,7 @@
-﻿using CraftingPlannerLib.DAL;
-using DataImport.Models;
+﻿using CraftingPlannerLib.Data;
+using CraftingPlannerLib.Models;
 
-namespace CraftingPlannerLib.RecipeDB
+namespace CraftingPlannerData.Repositories
 {
     internal class ModRepository : IModRepository
     {

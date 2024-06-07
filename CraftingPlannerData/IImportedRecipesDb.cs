@@ -1,6 +1,6 @@
 ﻿using CraftingPlannerLib.RecipeDB.Services;
 
-namespace CraftingPlannerLib.RecipeDB
+namespace CraftingPlannerData
 {
     public interface IImportedRecipesDb
     {

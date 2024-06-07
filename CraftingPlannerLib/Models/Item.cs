@@ -1,4 +1,4 @@
-﻿namespace DataImport.Models
+﻿namespace CraftingPlannerLib.Models
 {
     public sealed class Item : BaseModel
     {

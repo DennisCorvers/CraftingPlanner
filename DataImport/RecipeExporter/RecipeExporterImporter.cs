@@ -1,17 +1,25 @@
-﻿using DataImport.EqualityComparers;
+﻿using Models = CraftingPlannerLib.Models;
 using System.Data;
 using System.Text;
+using CraftingPlannerLib.EqualityComparers;
 
 namespace DataImport.RecipeExporter
 {
     public class RecipeExporterImporter : IDataImporter
     {
-        public async Task<RecipesImport> Import(string path)
+        public string Path { get; }
+
+        public RecipeExporterImporter(string filePath)
         {
-            var importData = await ReadAsync<ExportData>(path);
+            Path = filePath;
+        }
+
+        public async Task<RecipesImport> Import()
+        {
+            var importData = await ReadAsync<ExportData>(Path);
 
             if (importData == null)
-                throw new ArgumentException($"Unable to deserialize file: {path}");
+                throw new ArgumentException($"Unable to deserialize file: {Path}");
 
             var indexes = BuildIndexes(importData);
 

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace DataImport.Models
+namespace CraftingPlannerLib.Models
 {
     [DebuggerDisplay("{Name}")]
     public abstract class BaseModel

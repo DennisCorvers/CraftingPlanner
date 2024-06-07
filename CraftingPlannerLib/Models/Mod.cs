@@ -1,6 +1,6 @@
-﻿using DataImport.Utils;
+﻿using CraftingPlannerLib.Utils;
 
-namespace DataImport.Models
+namespace CraftingPlannerLib.Models
 {
     public sealed class Mod : BaseModel
     {
@@ -12,7 +12,7 @@ namespace DataImport.Models
             Items = items;
         }
 
-        internal void SetItems(IEnumerable<Item> items)
+        public void SetItems(IEnumerable<Item> items)
         {
             Items = items.OrderBy(x => x.Name).ToList();
         }

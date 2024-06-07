@@ -1,6 +1,6 @@
-﻿namespace DataImport.Utils
+﻿namespace CraftingPlannerLib.Utils
 {
-    internal static class HashUtilities
+    public static class HashUtilities
     {
         public static int GetEnumerableHash<T>(IEnumerable<T> values)
             where T : notnull

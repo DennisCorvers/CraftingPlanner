@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace DataImport.Utils
+namespace CraftingPlannerLib.Utils
 {
     internal static class NameFormatting
     {

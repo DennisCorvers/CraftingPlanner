@@ -1,7 +1,6 @@
-﻿using CraftingPlannerLib.DAL;
-using DataImport.Models;
+﻿using CraftingPlannerLib.Models;
 
-namespace CraftingPlannerLib.RecipeDB
+namespace CraftingPlannerLib.Data
 {
     public interface IItemRepository : IReadonlyRepository<Item>
     {

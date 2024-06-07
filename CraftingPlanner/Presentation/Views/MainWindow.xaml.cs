@@ -1,10 +1,8 @@
 ﻿using CraftingPlanner.Presentation.ViewModels.RecipeImport;
-using CraftingPlannerLib.RecipeDB;
+using CraftingPlannerData;
 using CraftingPlannerLib.RecipeDB.Models;
-using DataImport;
 using DataImport.RecipeExporter;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -41,9 +39,9 @@ namespace CraftingPlanner
         private async Task<IImportedRecipesDb> Test()
         {
             var path = "D:\\Documents\\temp\\stoneblock.json";
-            var importer = new RecipeExporterImporter();
+            var importer = new RecipeExporterImporter(path);
 
-            var itemdb = await ImportedRecipesDb.Create(importer, path);
+            var itemdb = await ImportedRecipesDb.Create(importer);
             return itemdb;
         }
     }

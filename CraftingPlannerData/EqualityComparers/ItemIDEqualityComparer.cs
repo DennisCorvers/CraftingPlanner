@@ -1,8 +1,8 @@
-﻿using DataImport.Models;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics;
+using CraftingPlannerLib.Models;
 
-namespace CraftingPlannerLib.RecipeDB.EqualityComparers
+namespace CraftingPlannerData.EqualityComparers
 {
     /// <summary>
     /// Comparer used to create (Item -> Recipe) indexes

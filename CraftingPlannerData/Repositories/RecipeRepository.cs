@@ -1,10 +1,9 @@
-﻿using CraftingPlannerLib.RecipeDB.EqualityComparers;
+﻿using CraftingPlannerData.EqualityComparers;
+using CraftingPlannerLib.Data;
+using CraftingPlannerLib.Models;
 using CraftingPlannerLib.RecipeDB.Models;
-using DataImport.Models;
-using System.Reflection.Metadata.Ecma335;
-using System.Xml.Serialization;
 
-namespace CraftingPlannerLib.RecipeDB
+namespace CraftingPlannerData.Repositories
 {
     internal class RecipeRepository : IRecipeRepository
     {
