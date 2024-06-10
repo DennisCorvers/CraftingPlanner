@@ -12,6 +12,8 @@ namespace CraftingPlannerLib.Models
 
         public ItemStack(Item item, int amount)
         {
+            if (amount <= 0) throw new ArgumentOutOfRangeException(nameof(amount));
+
             Item = item;
             Amount = amount;
         }

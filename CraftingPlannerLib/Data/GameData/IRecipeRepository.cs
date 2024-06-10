@@ -1,7 +1,7 @@
 ﻿using CraftingPlannerLib.Models;
 using CraftingPlannerLib.RecipeDB.Models;
 
-namespace CraftingPlannerLib.Data
+namespace CraftingPlannerLib.Data.GameData
 {
     public interface IRecipeRepository : IReadonlyRepository<Recipe>
     {

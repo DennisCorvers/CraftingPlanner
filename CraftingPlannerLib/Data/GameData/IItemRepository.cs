@@ -1,6 +1,6 @@
 ﻿using CraftingPlannerLib.Models;
 
-namespace CraftingPlannerLib.Data
+namespace CraftingPlannerLib.Data.GameData
 {
     public interface IItemRepository : IReadonlyRepository<Item>
     {

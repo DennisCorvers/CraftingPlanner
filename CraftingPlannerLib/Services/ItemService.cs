@@ -1,4 +1,4 @@
-﻿using CraftingPlannerLib.Data;
+﻿using CraftingPlannerLib.Data.GameData;
 using CraftingPlannerLib.Models;
 
 namespace CraftingPlannerLib.Services
