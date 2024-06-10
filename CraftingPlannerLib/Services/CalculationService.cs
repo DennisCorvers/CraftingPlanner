@@ -1,4 +1,5 @@
-﻿using CraftingPlannerLib.Data;
+﻿using CraftingPlannerLib.Calculation;
+using CraftingPlannerLib.Data;
 using CraftingPlannerLib.Models;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,18 @@ namespace CraftingPlannerLib.Services
             m_recipeRepository = recipeRepository;
         }
 
-        public void Calculate(Item target, int amount)
+        public CalculationResult Calculate(Item target, int amount)
         {
-            var calculator = new Calculation.Calculator(this, target);
-
+            var calculator = new Calculator(this, target);
+            return calculator.Calculate(amount);
         }
 
-        public void GetItemRecipes(Item target)
-        {;
-            var items = m_recipeRepository.FindAsOutput(target);
+        public Recipe? GetItemRecipe(Item target)
+        {
+            var recipeGrouping = m_recipeRepository.FindAsOutput(target);
+
+            // Return favourite recipe instead of just the first.
+            return recipeGrouping.Recipes.FirstOrDefault();
         }
     }
 }
